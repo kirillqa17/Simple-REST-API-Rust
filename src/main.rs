@@ -7,7 +7,7 @@ use std::sync::{Arc, Mutex};
 
 #[derive(Serialize, Deserialize, Clone)]
 struct Book {
-    id: usize,
+    id: Option<usize>,
     title: String,
     author: String,
     year: u32,
@@ -36,6 +36,7 @@ struct WebSocketMessage {
 impl StreamHandler<Result<ws::Message, ws::ProtocolError>> for WebSocketSession {
     fn handle(&mut self, msg: Result<ws::Message, ws::ProtocolError>, ctx: &mut Self::Context) {
         if let Ok(ws::Message::Text(text)) = msg {
+            println!("Received message: {}", text);
             if let Ok(request) = serde_json::from_str::<WebSocketMessage>(&text) {
                 let mut books = self.state.lock().unwrap();
                 let response = match request.action.as_str() {
@@ -53,7 +54,7 @@ impl StreamHandler<Result<ws::Message, ws::ProtocolError>> for WebSocketSession 
                     "add_book" => {
                         if let Some(mut book) = request.book {
                             let id = books.len() + 1;
-                            book.id = id;
+                            book.id = Some(id);
                             books.insert(id, book);
                             "Book added".to_string()
                         } else {
