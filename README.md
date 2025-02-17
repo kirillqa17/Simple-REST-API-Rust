@@ -42,12 +42,8 @@ wscat -c ws://127.0.0.1:8080/ws
 ```
 После подключения отправьте JSON-сообщение:
 ```json
-{
-  "action": "AddBook",
-  "book": {
-    "title": "New Book",
-    "author": "John Doe",
-    "year": 2023
-  }
-}
+{"action": "AddBook", "book": {"title": "1984", "author": "George Orwell", "year": 1949}}
+```
+```json
+{"action": "GetBooks"}
 ```
