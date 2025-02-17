@@ -22,3 +22,31 @@ Learning Objectives:
 
 Подсматривал сюда:
 https://github.com/wpcodevo/simple-api-actix-web
+
+
+### Тестирование
+
+Лично я тестировал с помощью wscat.
+Установите wscat через npm:
+
+npm install -g wscat
+
+Тестирование:
+Запустите сервер:
+
+cargo run
+
+Подключитесь к WebSocket серверу с помощью команды:
+
+wscat -c ws://127.0.0.1:8080/ws
+
+После подключения отправьте JSON-сообщение:
+
+{
+  "action": "AddBook",
+  "book": {
+    "title": "New Book",
+    "author": "John Doe",
+    "year": 2023
+  }
+}
