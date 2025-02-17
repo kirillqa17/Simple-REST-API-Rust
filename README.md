@@ -28,20 +28,20 @@ https://github.com/wpcodevo/simple-api-actix-web
 
 Лично я тестировал с помощью wscat.
 Установите wscat через npm:
-
+``` bash
 npm install -g wscat
-
+```
 Тестирование:
 Запустите сервер:
-
+``` bash
 cargo run
-
+```
 Подключитесь к WebSocket серверу с помощью команды:
-
+```bash
 wscat -c ws://127.0.0.1:8080/ws
-
+```
 После подключения отправьте JSON-сообщение:
-
+```json
 {
   "action": "AddBook",
   "book": {
@@ -50,3 +50,4 @@ wscat -c ws://127.0.0.1:8080/ws
     "year": 2023
   }
 }
+```
